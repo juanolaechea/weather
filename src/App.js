@@ -1,17 +1,22 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Header from "./components/Header";
 import Formulario from './components/Formulario';
+import Weather from './components/Weather';
+import Error from './components/Error';
+
 
 function App() {
 
   const [find, setFind]=useState ({
     city: '',
     country: ''
-});
+  });
 
- const [query, setQuery] = useState(false)
-
+  const [query, setQuery] = useState(false);
   const {city, country} =find;
+  const [result, setResult] =useState({});
+  const [error, setError] = useState(false);
+
 
 
   useEffect (() => {
@@ -26,12 +31,27 @@ function App() {
       const result = await answer.json();
 
       console.log(result);
+      setResult(result);
+      setQuery(false);
+
+
+      //detects if it finds the city
+      if(result.cod === "404"){
+        setError(true);
+      }else{
+        setError(false);
+      }
+
      }
+
     }
 
     queryAPI();
 
   },[query]);
+
+
+  
 
 
   return (
@@ -50,7 +70,10 @@ function App() {
               />
             </div>
             <div className="col m6 s12">
-              2
+              {error ? <Error mes="City not found" /> :null}
+              <Weather
+               result={result}
+              />
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const Formulario = ({find, setFind,setQuery}) => {
 
@@ -80,6 +81,14 @@ const Formulario = ({find, setFind,setQuery}) => {
 
 
      );
+}
+
+Formulario.propTypes ={
+    find: PropTypes.object.isRequired,
+    setFind: PropTypes.func.isRequired,
+    setQuery: PropTypes.func.isRequired
+
+
 }
  
 export default Formulario;

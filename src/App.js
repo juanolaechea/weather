@@ -30,7 +30,7 @@ function App() {
       const answer = await fetch(url);
       const result = await answer.json();
 
-      console.log(result);
+      
       setResult(result);
       setQuery(false);
 
@@ -47,7 +47,7 @@ function App() {
     }
 
     queryAPI();
-
+    //eslint-disable-next-line
   },[query]);
 
 
